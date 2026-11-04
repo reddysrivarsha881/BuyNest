@@ -13,7 +13,7 @@ const USER_ID =
 // ===============================
 
 const BASE_URL =
-    "https://buynest-qbzg.onrender.com";
+    "https://buynest-backend-p1s9.onrender.com";
 
 const CART_ITEMS_API =
     BASE_URL +

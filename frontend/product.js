@@ -26,7 +26,7 @@ const BACKEND_URL =
     window.location.hostname === "localhost" ||
     window.location.hostname === "127.0.0.1"
         ? "http://localhost:8080"
-        : "https://buynest-qbzg.onrender.com";
+        : "https://buynest-backend-p1s9.onrender.com";
 
 const PRODUCT_API_URL =
     `${BACKEND_URL}/getProducts`;

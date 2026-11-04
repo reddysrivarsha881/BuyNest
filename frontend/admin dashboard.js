@@ -2,7 +2,7 @@
 // ADMIN DASHBOARD
 // ===============================
 
-const BASE_URL = "https://buynest-qbzg.onrender.com";
+const BASE_URL = "https://buynest-backend-p1s9.onrender.com";
 
 
 // ===============================

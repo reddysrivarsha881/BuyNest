@@ -3,7 +3,7 @@
 // =====================================================
 
 const API_BASE_URL =
-    "https://buynest-qbzg.onrender.com";
+    "https://buynest-backend-p1s9.onrender.com";
 
 const API_URL =
     API_BASE_URL + "/getProducts";

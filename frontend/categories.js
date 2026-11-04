@@ -1,6 +1,6 @@
 "use strict";
 
-const API_URL = "https://buynest-qbzg.onrender.com/getCategories";
+const API_URL = "https://buynest-backend-p1s9.onrender.com/getCategories";
 
 const categoryGrid = document.getElementById("categoryGrid");
 

@@ -18,7 +18,7 @@ console.log("Order ID:", orderId);
 // =====================================================
 
 const GET_ORDER_API =
-    "https://buynest-qbzg.onrender.com/getorder/";
+    "https://buynest-backend-p1s9.onrender.com/getorder/";
 
 // =====================================================
 // HTML ELEMENTS
