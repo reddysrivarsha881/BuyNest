@@ -39,7 +39,6 @@ public class ProductController {
             @Valid @RequestBody Productdto productDTO) {
 
         return productService.saveProduct(productDTO);
-
     }
 
 
@@ -51,7 +50,6 @@ public class ProductController {
     public List<Product> getProducts() {
 
         return productService.getProducts();
-
     }
 
 
@@ -63,9 +61,7 @@ public class ProductController {
     public List<Product> getProductsByCategory(
             @PathVariable Long categoryId) {
 
-        return productService
-                .getProductsByCategory(categoryId);
-
+        return productService.getProductsByCategory(categoryId);
     }
 
 
@@ -77,9 +73,7 @@ public class ProductController {
     public Product getProductById(
             @PathVariable Long id) {
 
-        return productService
-                .getProductById(id);
-
+        return productService.getProductById(id);
     }
 
 
@@ -92,9 +86,7 @@ public class ProductController {
             @PathVariable Long id,
             @RequestBody Productdto productDTO) {
 
-        return productService
-                .updateProduct(id, productDTO);
-
+        return productService.updateProduct(id, productDTO);
     }
 
 
@@ -106,9 +98,31 @@ public class ProductController {
     public Product deleteProductById(
             @PathVariable Long id) {
 
-        return productService
-                .deleteProductById(id);
+        return productService.deleteProductById(id);
+    }
 
+
+    // =========================
+    // GET PRODUCTS ABOVE PRICE
+    // =========================
+
+    @GetMapping("/getProductsAbovePrice/{price}")
+    public List<Product> getProductsAbovePrice(
+            @PathVariable Double price) {
+
+        return productService.getProductsAbovePrice(price);
+    }
+
+
+    // =========================
+    // GET PRODUCTS BELOW PRICE
+    // =========================
+
+    @GetMapping("/getProductsBelowPrice/{price}")
+    public List<Product> getProductsBelowPrice(
+            @PathVariable Double price) {
+
+        return productService.getProductsBelowPrice(price);
     }
 
 }

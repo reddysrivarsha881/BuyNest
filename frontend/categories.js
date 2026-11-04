@@ -1,171 +1,105 @@
-const API_URL =
-    "https://buynest-qbzg.onrender.com/getCategories";
+"use strict";
 
+const API_URL = "https://buynest-qbzg.onrender.com/getCategories";
 
-const categoryGrid =
-    document.getElementById("categoryGrid");
-
+const categoryGrid = document.getElementById("categoryGrid");
 
 const categoryIcons = {
-
-    "Fashion": "👗",
-
-    "Electronics": "📱",
-
-    "Home & Kitchen": "🏠",
-
-    "Beauty": "💄",
-
-    "Footwear": "👟",
-
-    "Toys & Kids": "🧸",
-
-    "Books": "📚",
-
-    "Grocery": "🛒",
-
-    "Sports & Fitness": "🏋️",
-
-    "Accessories": "👜"
-
+    "fashion": "👗",
+    "electronics": "📱",
+    "home & kitchen": "🏠",
+    "home and kitchen": "🏠",
+    "beauty": "💄",
+    "footwear": "👟",
+    "toys & kids": "🧸",
+    "toys and kids": "🧸",
+    "books": "📚",
+    "grocery": "🛒",
+    "sports & fitness": "🏋️",
+    "sports and fitness": "🏋️",
+    "accessories": "👜"
 };
-
-
-// ===============================
-// LOAD CATEGORIES
-// ===============================
-
-async function loadCategories() {
-
-    try {
-
-        const response =
-            await fetch(API_URL);
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Failed to fetch categories"
-            );
-        }
-
-
-        const result =
-            await response.json();
-
-
-        console.log(
-            "Categories received:",
-            result
-        );
-
-
-        categoryGrid.innerHTML = "";
-
-
-        const categories =
-            Array.isArray(result)
-                ? result
-                : result.data;
-
-
-        if (!categories) {
-
-            throw new Error(
-                "No categories found"
-            );
-        }
-
-
-        categories.forEach(
-            category => {
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                card.className =
-                    "category-card";
-
-
-                const icon =
-                    categoryIcons[
-                        category.name
-                    ] || "🛍️";
-
-
-                card.innerHTML = `
-
-                    <div class="category-icon">
-                        ${icon}
-                    </div>
-
-                    <h2>
-                        ${category.name}
-                    </h2>
-
-                    <p>
-                        Explore ${category.name}
-                    </p>
-
-                `;
-
-
-                // ===============================
-                // CATEGORY CLICK
-                // ===============================
-
-                card.addEventListener(
-                    "click",
-                    function () {
-
-                        window.location.href =
-                            "products.html?categoryId=" +
-                            category.id;
-
-                    }
-                );
-
-
-                categoryGrid.appendChild(
-                    card
-                );
-
-            }
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Error loading categories:",
-            error
-        );
-
-
-        categoryGrid.innerHTML = `
-
-            <p style="
-                text-align:center;
-                grid-column:1/-1;
-                color:red;
-                font-size:18px;
-            ">
-
-                Unable to load categories.
-
-            </p>
-
-        `;
-    }
+function getCategoriesArray(result) {
+if (Array.isArray(result)) {
+return result;
 }
 
+if (Array.isArray(result?.data)) {
+    return result.data;
+}
+if (Array.isArray(result?.categories)) {
+    return result.categories;
+}
+if (Array.isArray(result?.content)) {
+    return result.content;
+}
+return [];
 
-// ===============================
-// INITIAL LOAD
-// ===============================
+}
+
+async function loadCategories() {
+if (!categoryGrid) {
+console.error("Category grid #categoryGrid was not found.");
+return;
+}
+
+categoryGrid.innerHTML = `
+    <p style="grid-column:1/-1;text-align:center;">
+        Loading categories...
+    </p>
+`;
+try {
+    const response = await fetch(API_URL);
+    if (!response.ok) {
+        throw new Error(`Categories API returned HTTP ${response.status}`);
+    }
+    const result = await response.json();
+    console.log("Categories received:", result);
+    const categories = getCategoriesArray(result);
+    categoryGrid.replaceChildren();
+    if (categories.length === 0) {
+        categoryGrid.innerHTML = `
+            <p style="grid-column:1/-1;text-align:center;">
+                No categories are available.
+            </p>
+        `;
+        return;
+    }
+    categories.forEach(category => {
+        const categoryId = category.id ?? category.categoryId;
+        const categoryName =
+            category.name ?? category.categoryName ?? category.category_name;
+        if (categoryId == null || !categoryName) {
+            console.warn("Skipping invalid category:", category);
+            return;
+        }
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "category-card";
+        const icon = categoryIcons[categoryName.trim().toLowerCase()] || "🛍️";
+        const iconElement = document.createElement("div");
+        iconElement.className = "category-icon";
+        iconElement.textContent = icon;
+        const heading = document.createElement("h2");
+        heading.textContent = categoryName;
+        const description = document.createElement("p");
+        description.textContent = `Explore ${categoryName}`;
+        card.append(iconElement, heading, description);
+        card.addEventListener("click", () => {
+            window.location.href =
+                `products.html?categoryId=${encodeURIComponent(categoryId)}`;
+        });
+        categoryGrid.appendChild(card);
+    });
+} catch (error) {
+    console.error("Error loading categories:", error);
+    categoryGrid.innerHTML = `
+        <p style="grid-column:1/-1;text-align:center;color:#c0392b;">
+            Unable to load categories. Please refresh the page and try again.
+        </p>
+    `;
+}
+
+}
 
 loadCategories();

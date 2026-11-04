@@ -1,0 +1,22 @@
+# Java / Maven
+backend/target/
+
+# Eclipse IDE
+backend/.classpath
+backend/.project
+backend/.settings/
+
+# Other IDE files
+.idea/
+.vscode/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Mac files
+.DS_Store
+
+# Logs
+*.log

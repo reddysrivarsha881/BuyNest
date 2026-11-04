@@ -2,214 +2,357 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>BuyNest - Products</title>
 
     <link rel="stylesheet" href="products.css">
-
 </head>
-
 
 <body>
 
+    <!-- ================= HEADER ================= -->
+    <header class="main-header">
 
-<!-- ================= HEADER ================= -->
+        <div class="logo">BuyNest</div>
 
-<header>
+        <nav class="main-nav">
+            <a href="home.html">Home</a>
+            <a href="products.html" class="active">Products</a>
+            <a href="categories.html">Categories</a>
+            <a href="orders.html">Orders</a>
+            <a href="cart.html">Cart 🛒</a>
+            <a href="customer-login.html">Login</a>
+        </nav>
 
-    <div class="logo">
-        BuyNest
-    </div>
-
-
-    <nav>
-
-        <a href="home.html">
-            Home
-        </a>
-
-        <a href="products.html" class="active">
-            Products
-        </a>
-
-        <a href="categories.html">
-            Categories
-        </a>
-
-        <a href="orders.html">
-            Orders
-        </a>
-
-        <a href="cart.html">
-            Cart 🛒
-        </a>
-
-        <a href="customer-login.html">
-            Login
-        </a>
-
-    </nav>
-
-</header>
+    </header>
 
 
+    <!-- ================= PAGE HEADING ================= -->
+    <section class="page-heading">
 
-<!-- ================= PAGE TITLE ================= -->
+        <h1>Our Products</h1>
 
-<section class="page-heading">
+        <p>
+            Discover products you'll love at BuyNest
+        </p>
 
-    <h1>
-        Our Products
-    </h1>
-
-    <p>
-        Discover products you'll love at BuyNest
-    </p>
-
-</section>
+    </section>
 
 
+    <!-- ================= SEARCH AND FILTERS ================= -->
+    <section class="filters">
 
-<!-- ================= SEARCH AND FILTER ================= -->
+        <!-- Search Bar -->
+        <div class="search-box">
 
-<section class="filters">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+                aria-label="Search products"
+            >
+
+            <button
+                id="searchButton"
+                type="button"
+                aria-label="Search">
+
+                🔍
+
+            </button>
+
+        </div>
 
 
-    <!-- SEARCH -->
+        <!-- AI Shopping Assistant Button -->
+        <button
+            type="button"
+            id="aiChatToggle"
+            class="ai-chat-toggle"
+            aria-label="Open AI Shopping Assistant"
+            aria-controls="aiChatWidget"
+            aria-expanded="false">
 
-    <div class="search-box">
+            <span class="ai-toggle-icon">💬</span>
 
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search products..."
-        >
+            <span>AI Assistant</span>
 
-        <button id="searchButton">
-            🔍
         </button>
 
-    </div>
+
+        <!-- Category Filter -->
+        <select
+            id="categorySelect"
+            aria-label="Filter by category">
+
+            <option value="">All Categories</option>
+
+        </select>
 
 
+        <!-- Sort Products -->
+        <select
+            id="sortSelect"
+            aria-label="Sort products">
 
-    <!-- CATEGORY -->
+            <option value="">Sort By</option>
+            <option value="priceLow">Price: Low to High</option>
+            <option value="priceHigh">Price: High to Low</option>
+            <option value="nameAZ">Name: A to Z</option>
+            <option value="nameZA">Name: Z to A</option>
 
-    <select id="categorySelect">
+        </select>
 
-        <option value="">
-            All Categories
-        </option>
-
-    </select>
-
-
-
-    <!-- SORT -->
-
-    <select id="sortSelect">
-
-        <option value="">
-            Sort By
-        </option>
-
-        <option value="priceLow">
-            Price: Low to High
-        </option>
-
-        <option value="priceHigh">
-            Price: High to Low
-        </option>
-
-        <option value="nameAZ">
-            Name: A to Z
-        </option>
-
-        <option value="nameZA">
-            Name: Z to A
-        </option>
-
-    </select>
+    </section>
 
 
-</section>
+    <!-- ================= PRODUCTS SECTION ================= -->
+    <section class="products-section">
+
+        <div
+            class="product-grid"
+            id="productGrid">
+
+            <!-- Products are loaded dynamically by product.js -->
+
+        </div>
+
+    </section>
 
 
+    <!-- ================= FOOTER ================= -->
+    <footer class="main-footer">
 
-<!-- ================= PRODUCTS ================= -->
+        <h2>BuyNest</h2>
 
-<section class="products-section">
+        <p>Everything you need, all in one place.</p>
 
-    <div
-        class="product-grid"
-        id="productGrid">
-    </div>
+        <div class="footer-links">
 
-</section>
+            <a href="home.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="categories.html">Categories</a>
+            <a href="orders.html">Orders</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
 
+        </div>
 
+        <p class="copyright">
+            © 2026 BuyNest. All Rights Reserved.
+        </p>
 
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    <h2>
-        BuyNest
-    </h2>
-
-
-    <p>
-        Everything you need, all in one place.
-    </p>
+    </footer>
 
 
-    <div class="footer-links">
-
-        <a href="home.html">
-            Home
-        </a>
-
-        <a href="products.html">
-            Products
-        </a>
-
-        <a href="categories.html">
-            Categories
-        </a>
-
-        <a href="orders.html">
-            Orders
-        </a>
-
-        <a href="#">
-            About Us
-        </a>
-
-        <a href="#">
-            Contact
-        </a>
-
-    </div>
+    <!-- ================= AI SHOPPING ASSISTANT ================= -->
+    <section
+        id="aiChatWidget"
+        class="ai-chat-widget"
+        aria-label="BuyNest AI Shopping Assistant"
+        aria-hidden="true"
+        hidden>
 
 
-    <p class="copyright">
+        <!-- AI HEADER -->
+        <div class="ai-chat-header">
 
-        © 2026 BuyNest. All Rights Reserved.
+            <div class="ai-header-info">
 
-    </p>
+                <div class="ai-header-icon">
+                    🛍️
+                </div>
 
-</footer>
+                <div class="ai-header-text">
+
+                    <h3>BuyNest Assistant</h3>
+
+                    <p>Your personal shopping helper</p>
+
+                </div>
+
+            </div>
 
 
+            <button
+                type="button"
+                id="aiChatClose"
+                class="ai-chat-close"
+                aria-label="Close AI assistant">
 
-<!-- ================= JAVASCRIPT ================= -->
+                &times;
 
-<script src="product.js"></script>
+            </button>
 
+        </div>
+
+
+        <!-- ================= LANGUAGE SELECTOR ================= -->
+        <div class="ai-language-selector">
+
+            <label for="aiLanguage">
+                🌐 Language / भाषा / భాష
+            </label>
+
+            <select id="aiLanguage" aria-label="Choose assistant language">
+
+                <option value="en" selected>
+                    English
+                </option>
+
+                <option value="hi">
+                    हिन्दी (Hindi)
+                </option>
+
+                <option value="te">
+                    తెలుగు (Telugu)
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ================= CHAT MESSAGES ================= -->
+        <div
+            id="aiChatMessages"
+            class="ai-chat-messages"
+            aria-live="polite"
+            aria-relevant="additions">
+
+
+            <!-- Initial Assistant Message -->
+            <div class="ai-message assistant">
+
+                <p>
+                    Hello! Welcome to BuyNest. 👋
+                </p>
+
+                <p>
+                    What are you looking for today?
+                    I can help you find products by name, category, or price.
+                </p>
+
+                <p>
+                    For example: Show me phones below ₹20,000.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SUGGESTED QUESTIONS ================= -->
+        <div class="ai-suggestions">
+
+            <p class="ai-suggestions-title">
+                Try asking:
+            </p>
+
+
+            <button
+                type="button"
+                data-ai-message="Show me products below 50000">
+
+                Products below ₹50,000
+
+            </button>
+
+
+            <button
+                type="button"
+                data-ai-message="Show me phones below 20000">
+
+                Phones below ₹20,000
+
+            </button>
+
+
+            <button
+                type="button"
+                data-ai-message="Show me laptops above 40000">
+
+                Laptops above ₹40,000
+
+            </button>
+
+
+            <button
+                type="button"
+                data-ai-message="Show all products">
+
+                Show all products
+
+            </button>
+
+        </div>
+
+
+        <!-- ================= VOICE STATUS ================= -->
+        <div
+            id="aiVoiceStatus"
+            class="ai-voice-status"
+            aria-live="polite">
+
+        </div>
+
+
+        <!-- ================= CHAT INPUT ================= -->
+        <form
+            id="aiChatForm"
+            class="ai-chat-form">
+
+
+            <input
+                type="text"
+                id="aiChatInput"
+                placeholder="Ask me what you want..."
+                autocomplete="off"
+                aria-label="Enter your shopping request"
+                required
+            >
+
+
+            <!-- Voice Search -->
+            <button
+                type="button"
+                id="aiVoiceButton"
+                class="ai-voice-button"
+                aria-label="Search using voice"
+                title="Search using voice">
+
+                🎤
+
+            </button>
+
+
+            <!-- Send Message -->
+            <button
+                type="submit"
+                id="aiSendButton"
+                class="ai-send-button">
+
+                Send
+
+            </button>
+
+        </form>
+
+
+        <!-- ================= AI FOOTER ================= -->
+        <div class="ai-chat-footer">
+
+            Product recommendations are based on BuyNest's product data.
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script src="product.js"></script>
 
 </body>
 

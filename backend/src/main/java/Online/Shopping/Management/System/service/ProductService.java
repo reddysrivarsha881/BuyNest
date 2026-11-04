@@ -32,45 +32,26 @@ public class ProductService {
         Product product = new Product();
 
         product.setName(productDTO.getName());
-
         product.setDescription(productDTO.getDescription());
-
         product.setPrice(productDTO.getPrice());
-
         product.setQuantity(productDTO.getQuantity());
-
         product.setImageUrl(productDTO.getImageUrl());
 
-
-        // =========================
         // PRODUCT COLORS
-        // =========================
-
         if (productDTO.getColors() != null) {
-
             product.setColors(
                     new ArrayList<>(productDTO.getColors())
             );
-
         } else {
-
             product.setColors(new ArrayList<>());
-
         }
 
-
-        // =========================
         // CATEGORY
-        // =========================
-
         if (productDTO.getCategoryId() == null) {
-
             throw new ResourceNotFoundException(
                     "Category ID cannot be null"
             );
-
         }
-
 
         Category category = categoryRepository
                 .findById(productDTO.getCategoryId())
@@ -80,40 +61,24 @@ public class ProductService {
                         )
                 );
 
-
         product.setCategory(category);
 
-
-        // =========================
         // SAVE PRODUCT
-        // =========================
+        Product savedProduct = productRepository.save(product);
 
-        Product savedProduct =
-                productRepository.save(product);
-
-
-        // =========================
         // RESPONSE DTO
-        // =========================
-
         Productdto response = new Productdto();
 
         response.setName(savedProduct.getName());
-
         response.setDescription(savedProduct.getDescription());
-
         response.setPrice(savedProduct.getPrice());
-
         response.setQuantity(savedProduct.getQuantity());
-
         response.setImageUrl(savedProduct.getImageUrl());
-
         response.setColors(savedProduct.getColors());
 
         response.setCategoryId(
                 savedProduct.getCategory().getId()
         );
-
 
         return response;
     }
@@ -126,7 +91,6 @@ public class ProductService {
     public List<Product> getProducts() {
 
         return productRepository.findAll();
-
     }
 
 
@@ -134,10 +98,7 @@ public class ProductService {
     // GET PRODUCTS BY CATEGORY
     // =========================
 
-    public List<Product> getProductsByCategory(
-            Long categoryId) {
-
-        // Check category exists
+    public List<Product> getProductsByCategory(Long categoryId) {
 
         categoryRepository
                 .findById(categoryId)
@@ -147,12 +108,7 @@ public class ProductService {
                         )
                 );
 
-
-        // Get products belonging to category
-
-        return productRepository
-                .findByCategoryId(categoryId);
-
+        return productRepository.findByCategoryId(categoryId);
     }
 
 
@@ -169,7 +125,6 @@ public class ProductService {
                                 "Product not found"
                         )
                 );
-
     }
 
 
@@ -177,9 +132,7 @@ public class ProductService {
     // UPDATE PRODUCT
     // =========================
 
-    public Product updateProduct(
-            Long id,
-            Productdto productDTO) {
+    public Product updateProduct(Long id, Productdto productDTO) {
 
         Product product = productRepository
                 .findById(id)
@@ -189,85 +142,27 @@ public class ProductService {
                         )
                 );
 
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setQuantity(productDTO.getQuantity());
+        product.setImageUrl(productDTO.getImageUrl());
 
-        // =========================
-        // PRODUCT NAME
-        // =========================
-
-        product.setName(
-                productDTO.getName()
-        );
-
-
-        // =========================
-        // DESCRIPTION
-        // =========================
-
-        product.setDescription(
-                productDTO.getDescription()
-        );
-
-
-        // =========================
-        // PRICE
-        // =========================
-
-        product.setPrice(
-                productDTO.getPrice()
-        );
-
-
-        // =========================
-        // QUANTITY
-        // =========================
-
-        product.setQuantity(
-                productDTO.getQuantity()
-        );
-
-
-        // =========================
-        // IMAGE URL
-        // =========================
-
-        product.setImageUrl(
-                productDTO.getImageUrl()
-        );
-
-
-        // =========================
         // COLORS
-        // =========================
-
         if (productDTO.getColors() != null) {
-
             product.setColors(
-                    new ArrayList<>(
-                            productDTO.getColors()
-                    )
+                    new ArrayList<>(productDTO.getColors())
             );
-
         } else {
-
-            product.setColors(
-                    new ArrayList<>()
-            );
-
+            product.setColors(new ArrayList<>());
         }
 
-
-        // =========================
         // CATEGORY
-        // =========================
-
         if (productDTO.getCategoryId() == null) {
-
             throw new ResourceNotFoundException(
                     "Category ID cannot be null"
             );
-
         }
-
 
         Category category = categoryRepository
                 .findById(productDTO.getCategoryId())
@@ -277,16 +172,9 @@ public class ProductService {
                         )
                 );
 
-
         product.setCategory(category);
 
-
-        // =========================
-        // SAVE UPDATED PRODUCT
-        // =========================
-
         return productRepository.save(product);
-
     }
 
 
@@ -304,12 +192,29 @@ public class ProductService {
                         )
                 );
 
-
         productRepository.delete(product);
 
-
         return product;
+    }
 
+
+    // =========================
+    // GET PRODUCTS ABOVE PRICE
+    // =========================
+
+    public List<Product> getProductsAbovePrice(Double price) {
+
+        return productRepository.findByPriceGreaterThan(price);
+    }
+
+
+    // =========================
+    // GET PRODUCTS BELOW PRICE
+    // =========================
+
+    public List<Product> getProductsBelowPrice(Double price) {
+
+        return productRepository.findByPriceLessThan(price);
     }
 
 }
