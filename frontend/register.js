@@ -1,6 +1,6 @@
-const form = document.querySelector(form);
+const form = document.querySelector("form");
 
-form.addEventListener(submit, async function (event) {
+form.addEventListener("submit", async function (event) {
 
 event.preventDefault();
 const name = document.querySelector("#name").value.trim();
